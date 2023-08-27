@@ -1,0 +1,7 @@
+1.- Cambio de cancha
+
+Se realiza sumando los juegos de ambos jugadores y si el resultado
+es un numero impar entonces se realiza un cambio de cancha
+
+2.- Cuando se llega a iguales (40-40) gana el jugador que haga
+dos puntos consecutivos.
