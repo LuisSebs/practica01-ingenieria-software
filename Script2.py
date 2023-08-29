@@ -1,4 +1,4 @@
-def exist(arr, target):
+def exist(arr, b):
 
     """
         Dado un arreglo y un numero objetivo encontrar dos números
@@ -10,7 +10,7 @@ def exist(arr, target):
         con recorrer una vez todo el arreglo.
 
         :param arr: arreglo de numeros
-        :param target: numero objetivo
+        :param b: numero objetivo
         :return: True si existen dos numero, False en caso contrario
 
     """
@@ -19,16 +19,17 @@ def exist(arr, target):
     encontrados = set()
 
     # Recorremos todo el arreglo
-    for n in arr:
-        # Restamos el objetivo con el valor n
-        numero_faltante = target - n
+    for a in arr:
+        # Ecuacion que representa este problema
+        # a + x = b --> x = b - a, con a y b constantes
+        x = b - a
         # Verificamos si el numero que lo complementa esta en los numeros que hemos encontrado y ambos numeros no son iguales
-        if (numero_faltante in encontrados) and numero_faltante != n:
-            return True
+        if (x in encontrados) and x != a:
+            # Regresamos los numeros que sumados dan como resultado target
+            return [x, a]
         else:
-            encontrados.add(n)
-    
-    return False
+            encontrados.add(a)    
+    return []
 
 class BinaryTree():
 
@@ -136,6 +137,30 @@ class BinaryTree():
             self.left = None
             self.right = None
 
+def menuExist():
+    k = None
+    arr = []
+    while True:
+        print(f"[0] Agrega elementos a la lista {'' if len(arr) == 0 else arr} \n[1] Agregar K {'' if k == None else '(k = '+str(k)+')'} \n[2] Correr metodo \n[3] Regresar")
+        op1 = int(input("Elige una opcion: "))
+        if op1 == 0:
+            nums = input("Ingresa los numeros separados por espacio: ")
+            for n in nums.split(' '):
+                arr.append(int(n))
+        elif op1 == 1:
+            k = int(input("Ingresa un numero: "))
+        elif op1 == 2:
+            if k != None and len(arr) != 0:
+                print(exist(arr,k))
+            else:
+                print("Por favor ingresa k y llena el arreglo de elementos")
+        elif op1 == 3:
+            print("\n")
+            break
+        else:
+            print("Opcion no valida")
+        print("\n")
+
 def makeTree():
     
     t = BinaryTree()
@@ -154,13 +179,22 @@ def makeTree():
             t.insert(n)
         # Recorrido en preorden
         elif op == 1:
-            print(t.preorden([]))
+            if t.root != None:
+                print(t.preorden([]))
+            else:
+                print("Por favor llena el arbol antes")
         # Recorrido en inorden
         elif op == 2:
-            print(t.inorden([]))
+            if t.root != None:
+                print(t.inorden([]))
+            else:
+                print("Por favor llena el arbol antes")
         # Recorrido en postorden
         elif op == 3:
-            print(t.postorden([]))
+            if t.root != None:
+                print(t.postorden([]))
+            else:
+                print("Por favor llena el arbol antes")
         # Salir de la funcion
         elif op == 4:
             print("\n")
@@ -175,28 +209,7 @@ if __name__ == "__main__":
         op = int(input("Ingresa una opcion: "))
         print("\n")
         if op == 0:
-            k = None
-            arr = []
-            while True:
-                print(f"[0] Agrega elementos a la lista {'' if len(arr) == 0 else arr} \n[1] Agregar K {'' if k == None else '(k = '+str(k)+')'} \n[2] Correr metodo \n[3] Regresar")
-                op1 = int(input("Elige una opcion: "))
-                if op1 == 0:
-                    nums = input("Ingresa los numeros separados por espacio: ")
-                    for n in nums.split(' '):
-                        arr.append(int(n))
-                elif op1 == 1:
-                    k = int(input("Ingresa un numero: "))
-                elif op1 == 2:
-                    if k != None and len(arr) != 0:
-                        print(exist(arr=arr,target=k))
-                    else:
-                        print("Por favor ingresa k y llena el arreglo de elementos")
-                elif op1 == 3:
-                    print("\n")
-                    break
-                else:
-                    print("Opcion no valida")
-                print("\n")
+            menuExist()
         elif op == 1:
             makeTree()
         elif op == 2:

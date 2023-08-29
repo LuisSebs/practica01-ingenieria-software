@@ -300,10 +300,10 @@ class Tablero:
         """
         self.ganador = None
 
-        self.preprocesamiento(0,4,4)
+        # self.preprocesamiento(0,4,4) # preprocesamiento para avanzar en los juegos
         # Registramos set 1
         self.sett()
-        self.preprocesamiento(1,4,4)
+        # self.preprocesamiento(1,4,4) # preprocesamiento para avanzar en los juegos
         # Registramos set 2
         self.sett()
         # Verificamos si algun jugador ha ganado dos sets
@@ -312,7 +312,7 @@ class Tablero:
         elif self.jugador2.sets == 2:
             self.ganador = self.jugador2
         else:
-            self.preprocesamiento(2,4,4)
+            # self.preprocesamiento(2,4,4) # preprocesamiento para avanzar en los juegos
             # Registramos set 3
             self.sett()
             self.ganador = self.jugador1 if self.jugador1.sets == 2 else self.jugador2
