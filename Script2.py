@@ -18,18 +18,28 @@ def exist(arr, b):
     # Numeros encontrados
     encontrados = set()
 
+    # Posicion de encontrados
+    pos = {}
+
+    # Iterador
+    i = 0
+
     # Recorremos todo el arreglo
     for a in arr:
         # Ecuacion que representa este problema
         # a + x = b --> x = b - a, con a y b constantes
         x = b - a
         # Verificamos si el numero que lo complementa esta en los numeros que hemos encontrado y ambos numeros no son iguales
-        if (x in encontrados) and x != a:
-            # Regresamos los numeros que sumados dan como resultado target
-            return [x, a]
+        if (x in encontrados):
+            # Regresamos los indices de los numeros que sumados dan como resultado target
+            return [pos.get(x), i]
         else:
-            encontrados.add(a)    
-    return []
+            encontrados.add(a)  
+            pos[a] = i
+        # Actualizamos el iterador
+        i += 1  
+
+    return [-1,-1]
 
 class BinaryTree():
 
@@ -151,7 +161,14 @@ def menuExist():
             k = int(input("Ingresa un numero: "))
         elif op1 == 2:
             if k != None and len(arr) != 0:
-                print(exist(arr,k))
+                indices = exist(arr,k) 
+                print(indices)
+                i1 = indices[0]
+                i2 = indices[1]
+                if i1 != -1 and i2 != -1:
+                    n1 = arr[i1]
+                    n2 = arr[i2]
+                    print(f"{n1} + {n2} = {k} ? " + f"{(n1 + n2)==k}")
             else:
                 print("Por favor ingresa k y llena el arreglo de elementos")
         elif op1 == 3:
